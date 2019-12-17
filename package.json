@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf src/result/*.xlsx && rm -rf src/result/*.log",
-    "push": "git push -u startimes && git push -u github &&git push -u origin"
+    "push": "git push -u github &&git push -u origin"
   },
   "author": "yangxl",
   "license": "ISC",
