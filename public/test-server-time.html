@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://console.startimestv.com/common/libs/jquery/jquery.min.js"></script>
+  <script src="http://momentjs.cn/downloads/moment.min.js"></script>
+  <title>测试服务器超时时间</title>
+</head>
+<body>
+  <button onclick="start()">开始</button>
+  <button onclick="end()">结束</button>
+  <script>
+    var task = null
+    var taskIndex = 0
+    function start() {
+      send()
+      task = setInterval(function () {
+        send()
+      }, 5000)
+    }
+    function end() {
+      clearInterval(task)
+    }
+    function send() {
+      var start = moment()
+      var next = taskIndex++;
+      console.log(next + '-开始发送请求：' + start.format('hh:mm:ss.SSS'))
+      $.ajax({
+        url: 'https://console.startimestv.com/auth?lang=zh_CN',
+        method: 'POST',
+        contentType: "application/json;charset=UTF-8",
+        data: JSON.stringify({ "username": "wanglijing", "password": "wangwang1" }),
+        success(res) {
+          var end = moment()
+          console.log(next + '-成功接收请求：' + moment().format('hh:mm:ss.SSS'), '时间差：' + (end.diff(start)))
+          // console.log(res)
+        }
+      })
+    }
+  </script>
+</body>
+</html>

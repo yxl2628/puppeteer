@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <style>
+  .upload-demo {
+    max-width: 700px;
+  }
+  .done {
+    margin-top: 20px;
+    color: #67C23A;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <el-upload class="upload-demo" :multiple.boolean="true" action="https://quic.snomile.ink/upload/" :before-upload="handleBefore" :on-success="handleSuccess"
+      :file-list="fileList">
+      <el-button size="small" type="primary" @click="clean">点击上传</el-button>
+    </el-upload>
+    <div class="done" v-if="done">上传完成，耗时：{{end / 1000}}s</div>
+  </div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: function () {
+      return { start: 0, end: 0, fileList: [], done: false }
+    },
+    methods: {
+      clean() {
+        this.fileList = []
+      },
+      handleBefore() {
+        if (this.start > 0) {
+          return
+        }
+        this.start = new Date().getTime()
+      },
+      handleSuccess(response, file, fileList) {
+        let hasUpload = false
+        fileList.forEach(item => {
+          if (item.status !== 'success') {
+            hasUpload = true
+          }
+        })
+        if (!hasUpload) {
+          this.done = true;
+          this.end = new Date().getTime() - this.start
+          this.start = 0
+        }
+      }
+    }
+  })
+</script>
+
+</html>

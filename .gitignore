@@ -1,0 +1,7 @@
+node_modules
+password
+data
+src/result/*.xlsx
+src/result/*.json
+src/result/*.png
+src/result/*.log

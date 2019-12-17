@@ -1,0 +1,19 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "fe auto test",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf src/result/*.xlsx && rm -rf src/result/*.log",
+    "push": "git push -u startimes && git push -u github &&git push -u origin"
+  },
+  "author": "yangxl",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "dayjs": "^1.8.16",
+    "log4js": "^5.2.2",
+    "node-xlsx": "^0.15.0",
+    "puppeteer": "^2.0.0"
+  }
+}
